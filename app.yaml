@@ -1,5 +1,5 @@
 runtime: python39  # Use the appropriate runtime for your application
-entrypoint: uvicorn app.main:app --host=0.0.0.0 --port=$PORT  # Adjust entrypoint based on your application structure
+entrypoint: uvicorn app.main3:app --host=0.0.0.0 --port=$PORT  # Adjust entrypoint based on your application structure
 
 # Optional: Configure your app
 env: standard
