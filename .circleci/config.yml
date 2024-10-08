@@ -6,16 +6,25 @@ jobs:
     # Install dependencies and run tests
     docker:
       - image: cimg/python:3.8-node
+    executor: python-executor
     steps:
       - checkout  # Check out your code
       - python/install-packages  # Install dependencies using your package manager (pip/poetry)
       - run:
-          name: Run Unit Tests
-          command: pytest --junitxml=junit.xml --cov=app/tests --cov-report=xml  # Add coverage report
+          name: Set Up Python
+          command: python -m venv venv && . venv/bin/activate
+      - run:
+          name: Install Dependencies
+          command: |
+            pip install -r requirements.txt
+      - run:
+          name: Run Tests
+          command: |
+            pytest --junitxml=junit.xml --cov=app --cov-report=xml
       - store_test_results:
-          path: junit.xml  # Store test results for CircleCI's UI
+          path: junit.xml
       - store_artifacts:
-          path: coverage.xml  # Store coverage report
+          path: coverage.xml
   deploy:
     docker:
       - image: cimg/base:stable
