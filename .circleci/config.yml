@@ -37,7 +37,6 @@ jobs:
     docker:
       - image: google/cloud-sdk
     steps:
-      # Placeholder deploy job
       - checkout
       - run:
           name: deploy to app engine
