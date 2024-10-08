@@ -35,16 +35,24 @@ jobs:
           path: coverage.xml
   deploy:
     docker:
-      - image: cimg/base:stable
+      - image: google/cloud-sdk
     steps:
       # Placeholder deploy job
+      - checkout
       - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+          name: deploy to app engine
+          command: |
+            echo ${GCLOUD_SERVICE_KEY} > /tmp/sa_key.json
+            gcloud auth activate-service-account --key-file=/tmp/sa_key.json
+            rm /tmp/sa_key.json
+            gcloud config set project user-server-circleci
+            gcloud config set compute/region us-central
+            gcloud app deploy
+
 workflows:
   build-and-test:
     jobs:
       - test-python
-    # - deploy:
-    #     requires:
-    #       - test-python
+      - deploy:
+          requires:
+            - test-python
