@@ -10,7 +10,7 @@ executors:
     working_directory: ~/project  # Set the working directory for the job
 
 jobs:
-  test-python:
+  build:
     # Install dependencies and run tests
     docker:
       - image: cimg/python:3.8-node
@@ -46,12 +46,12 @@ jobs:
             rm /tmp/sa_key.json
             gcloud config set project user-server-circleci
             gcloud config set compute/region us-central
-            gcloud app deploy
+            gcloud app deploy app.yaml
 
 workflows:
   build-and-test:
     jobs:
-      - test-python
+      - build
       - deploy:
           requires:
-            - test-python
+            - build
