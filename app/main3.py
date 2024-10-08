@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from fastapi import status
 from fastapi.responses import JSONResponse
 
-from base_models import User2
-from services.greet_service import GreetService
+from app.base_models import User2
+from app.services.greet_service import GreetService
 
 app = FastAPI()
 greet_service = GreetService()
