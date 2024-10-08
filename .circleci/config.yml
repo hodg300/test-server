@@ -1,6 +1,14 @@
 version: 2.1
 orbs:
   python: circleci/python@2
+
+
+executors:
+  python-executor:
+    docker:
+      - image: cimg/python:3.8  # Define the Docker image for the executor
+    working_directory: ~/project  # Set the working directory for the job
+
 jobs:
   test-python:
     # Install dependencies and run tests
