@@ -1,5 +1,3 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:python:.
 version: 2.1
 orbs:
   python: circleci/python@2
@@ -9,16 +7,20 @@ jobs:
     docker:
       - image: cimg/python:3.8-node
     steps:
-      - checkout
-      - python/install-packages
+      - checkout  # Check out your code
+      - python/install-packages  # Install dependencies using your package manager (pip/poetry)
+      - run:
+          name: Run Unit Tests
+          command: pytest --junitxml=junit.xml --cov=src --cov-report=xml  # Add coverage report
       - store_test_results:
-          path: junit.xml
+          path: junit.xml  # Store test results for CircleCI's UI
+      - store_artifacts:
+          path: coverage.xml  # Store coverage report
   deploy:
-    # This is an example deploy job, not actually used by the workflow
     docker:
       - image: cimg/base:stable
     steps:
-      # Replace this with steps to deploy to users
+      # Placeholder deploy job
       - run:
           name: deploy
           command: '#e.g. ./deploy.sh'
