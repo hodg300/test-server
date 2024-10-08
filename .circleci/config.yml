@@ -11,7 +11,7 @@ jobs:
       - python/install-packages  # Install dependencies using your package manager (pip/poetry)
       - run:
           name: Run Unit Tests
-          command: pytest --junitxml=junit.xml --cov=app --cov-report=xml  # Add coverage report
+          command: pytest --junitxml=junit.xml --cov=app/tests --cov-report=xml  # Add coverage report
       - store_test_results:
           path: junit.xml  # Store test results for CircleCI's UI
       - store_artifacts:
