@@ -21,6 +21,6 @@ def get_username():
 
 @app.post("/update-greet")
 def update_username(user: User2):
-    if user.name is None or user.name is "":
+    if user.name is None or user.name == "":
         return JSONResponse(content="name is empty", status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
     return greet_service.update_user_name(user=user)
