@@ -29,6 +29,10 @@ jobs:
           name: Run Tests
           command: |
             pytest --junitxml=junit.xml --cov=app --cov-report=xml
+      - run:
+          name: Print Firebase Credentials (for debugging)
+          command: |
+            echo "FIREBASE_CREDENTIALS_JSON=${FIREBASE_CREDENTIALS_JSON}"  # For debugging
       - store_test_results:
           path: junit.xml
       - store_artifacts:
@@ -38,10 +42,6 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - checkout
-      - run:
-          name: Set Up Firebase Credentials
-          command: |
-            echo "$FIREBASE_CREDENTIALS_JSON" > /tmp/firebase-credentials.json
       - run:
           name: deploy to app engine
           command: |
