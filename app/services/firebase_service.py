@@ -1,3 +1,6 @@
+import json
+import os
+
 import firebase_admin
 from firebase_admin import credentials, firestore
 from typing import Dict, Any, List
@@ -6,8 +9,7 @@ from typing import Dict, Any, List
 class FirebaseService:
     def __init__(self):
         # Initialize Firebase app
-        cred = credentials.Certificate(
-            "/Users/hodgohasi/PycharmProjects/test-server/football-project-c5ca5-firebase-adminsdk-kken4-aec08ba6df.json")
+        cred = credentials.Certificate("FIREBASE_ENV")
         firebase_admin.initialize_app(cred)
 
         # Initialize Firestore client
