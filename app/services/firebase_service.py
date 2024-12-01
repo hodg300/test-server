@@ -22,6 +22,8 @@ class FirebaseService:
         # Initialize Firestore client
         self.db = firestore.client()
 
+        print(f"{firebase_credentials_json=}")
+
 
 
     def save_data_to_firestore(self, collection: str, document_id: str, data: Dict[str, Any]) -> Dict[str, Any]:
