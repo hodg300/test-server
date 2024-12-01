@@ -1,3 +1,4 @@
+import json
 import os
 
 import firebase_admin
@@ -11,7 +12,7 @@ class FirebaseService:
         firebase_credentials_json = os.getenv("FIREBASE_CREDENTIALS_JSON")
         if firebase_credentials_json:
             cred = credentials.Certificate(
-                "/tmp/firebase-credentials.json")
+                json.loads(firebase_credentials_json))
         else:
             cred = credentials.Certificate(
                 "/Users/hodgohasi/PycharmProjects/test-server/tmp/firebase-credentials.json")
