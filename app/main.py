@@ -1,27 +1,45 @@
 from fastapi import FastAPI
+from fastapi import status
+from fastapi.responses import JSONResponse
 
-# from base_models import User
-# from services.user_service import UserService
-import os
+from app.base_models import User2, Player, HistoryShuffle
+from app.services.football_service import FootballService
+from app.services.greet_service import GreetService
+
 app = FastAPI()
-# user_service = UserService()
+football_service = FootballService()
 
 
-@app.get('/')
-def read_root():
-    return {"hello": f"from: {os.environ.get('ENV', 'DEFAULT_ENV')}"}
+@app.get("/")
+def route():
+    return {"hello": "world1"}
 
-# @app.get('/home')
-# def read_root():
-#     return {"res": "HelloWorld"}
-#
-#
-# @app.get('/user')
-# def read_root():
-#
-#     return user_service.get_user_data()
-#
-#
-# @app.post('/save-user')
-# def read_root(user: User):
-#     return user_service.update_user_data(user=user)
+
+@app.post('/add-player')
+def add_player(player: Player):
+    return football_service.add_player(player=player)
+
+
+@app.get('/all-players')
+def get_all_players():
+    return football_service.get_all_players()
+
+
+@app.get('/last-selected-players')
+def get_last_selected_players():
+    return football_service.get_last_selected_players()
+
+
+@app.post('/save-last-selected-players')
+def save_last_selected_players(players: dict):
+    return football_service.save_last_selected_players(players=players)
+
+
+@app.post('/save-history-shuffle')
+def save_history_shuffle(history_shuffle: HistoryShuffle):
+    return football_service.save_history_shuffle(history_shuffle)
+
+
+@app.get('/all-history-shuffles')
+def save_history_shuffle(limit=10):
+    return football_service.get_all_history_shuffles(limit)
