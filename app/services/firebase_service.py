@@ -1,4 +1,3 @@
-import json
 import os
 
 import firebase_admin
@@ -8,14 +7,15 @@ from typing import Dict, Any, List
 
 class FirebaseService:
     def __init__(self):
+        # Initialize Firebase app
+        firebase_credentials_json = os.getenv("FIREBASE_CREDENTIALS_JSON")
+        if firebase_credentials_json:
+            cred = credentials.Certificate(
+                "/tmp/firebase-credentials.json")
+        else:
+            cred = credentials.Certificate(
+                "/Users/hodgohasi/PycharmProjects/test-server/tmp/firebase-credentials.json")
 
-        firebase_credentials_json = os.getenv("FIREBASE_JSON", "FIREBASE_CRED_JSON")
-        if not firebase_credentials_json:
-            raise ValueError("Environment variable 'FIREBASE_JSON' is not set or empty.")
-
-        # Load credentials from the JSON string
-        cred_dict = json.loads(firebase_credentials_json)
-        cred = credentials.Certificate(cred_dict)
         firebase_admin.initialize_app(cred)
 
         # Initialize Firestore client

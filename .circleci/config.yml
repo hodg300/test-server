@@ -39,6 +39,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Set Up Firebase Credentials
+          command: |
+            echo "$FIREBASE_CREDENTIALS_JSON" > /tmp/firebase-credentials.json
+      - run:
           name: deploy to app engine
           command: |
             echo ${GCLOUD_SERVICE_KEY} > /tmp/sa_key.json

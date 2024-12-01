@@ -1,1 +1,2 @@
 .env
+tmp/firebase-credentials.json
