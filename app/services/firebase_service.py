@@ -9,7 +9,7 @@ from typing import Dict, Any, List
 class FirebaseService:
     def __init__(self):
         # Initialize Firebase app
-        cred = credentials.Certificate("FIREBASE_ENV")
+        cred = credentials.Certificate(json.loads(os.getenv("FIREBASE_ENV_BACKUP")))
         firebase_admin.initialize_app(cred)
 
         # Initialize Firestore client
