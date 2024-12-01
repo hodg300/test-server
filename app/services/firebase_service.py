@@ -2,6 +2,7 @@ import json
 import os
 
 import firebase_admin
+from dotenv import load_dotenv
 from firebase_admin import credentials, firestore
 from typing import Dict, Any, List
 
@@ -9,6 +10,8 @@ from typing import Dict, Any, List
 class FirebaseService:
     def __init__(self):
         # Initialize Firebase app
+        load_dotenv()
+
         firebase_credentials_json = os.getenv("FIREBASE_CREDENTIALS_JSON")
         if firebase_credentials_json:
             cred = credentials.Certificate(
@@ -22,7 +25,7 @@ class FirebaseService:
         # Initialize Firestore client
         self.db = firestore.client()
 
-        print(f"{firebase_credentials_json=}")
+        print(f"{os.getenv("FIREBASE_CREDENTIALS_JSON")=}")
 
 
 
