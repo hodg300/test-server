@@ -12,20 +12,19 @@ class FirebaseService:
         # Initialize Firebase app
         load_dotenv()
 
-        firebase_credentials_json = os.getenv("FIREBASE_CREDENTIALS_JSON")
+        firebase_credentials_json = os.getenv("FIREBASE_CRED_JSON")
         if firebase_credentials_json:
             cred = credentials.Certificate(
                 json.loads(firebase_credentials_json))
         else:
-            cred = credentials.Certificate(
-                "/Users/hodgohasi/PycharmProjects/test-server/tmp/firebase-credentials.json")
+            cred = credentials.Certificate("/tmp/firebase-credentials.json")
 
         firebase_admin.initialize_app(cred)
 
         # Initialize Firestore client
         self.db = firestore.client()
 
-        print(f"{os.getenv("FIREBASE_CREDENTIALS_JSON")=}")
+        print(f"{firebase_credentials_json=}")
 
 
 

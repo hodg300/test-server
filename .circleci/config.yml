@@ -29,10 +29,6 @@ jobs:
           name: Run Tests
           command: |
             pytest --junitxml=junit.xml --cov=app --cov-report=xml
-      - run:
-          name: Print Firebase Credentials (for debugging)
-          command: |
-            echo "FIREBASE_CREDENTIALS_JSON=${FIREBASE_CREDENTIALS_JSON}"  # For debugging
       - store_test_results:
           path: junit.xml
       - store_artifacts:
@@ -46,6 +42,7 @@ jobs:
           name: deploy to app engine
           command: |
             echo ${GCLOUD_SERVICE_KEY} > /tmp/sa_key.json
+            echo ${FIREBASE_CREDENTIALS_JSON} > /tmp/firebase-credentials.json
             gcloud auth activate-service-account --key-file=/tmp/sa_key.json
             rm /tmp/sa_key.json
             gcloud config set project user-server-circleci
