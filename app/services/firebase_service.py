@@ -20,7 +20,7 @@ class FirebaseService:
             firebase_admin.initialize_app(cred)
 
         else:
-            cred = credentials.Certificate("/Users/hodgohasi/PycharmProjects/test-server/tmp/firebase-credentials.json")
+            cred = credentials.Certificate("/Users/hodgohasi/PycharmProjects/test-server/firebase-credentials.json")
             firebase_admin.initialize_app(cred)
         # cred = credentials.Certificate("/Users/hodgohasi/PycharmProjects/test-server/firebase-credentials.json")
         # firebase_admin.initialize_app(cred)
