@@ -12,7 +12,7 @@ football_service = FootballService()
 
 @app.get("/")
 def route():
-    return {"hello": "world1"}
+    return {"hello": "world2"}
 
 
 @app.post('/add-player')
